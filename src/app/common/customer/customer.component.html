@@ -1,0 +1,57 @@
+<div class="container">
+    <div>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <h2>Customers task</h2>
+            </mat-card-header>
+            <mat-card-content>
+                <input type="text" name="taskName" placeholder="Enter Task Name"  [(ngModel)]="taskName" class="m-2" >
+                <br/>
+                <input type="text" name="taskDescription" placeholder="Enter Task Description" [(ngModel)]="taskDescription" class="m-2">
+                <br/>
+                <mat-form-field class="m-2">
+                    <mat-label>Asing Task</mat-label>
+                    <mat-select [(ngModel)]="customerAssing" name="customerAssing">
+                      @for (c of customerNameList; track $index) {
+                        <mat-option [value]="c.value">{{c.viewValue}}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+
+                <mat-form-field class="m-2">
+                    <mat-label>Task status</mat-label>
+                    <mat-select [(ngModel)]="taskStatus" name="taskStatus">
+                      @for (t of taskStatusList; track $index) {
+                        <mat-option [value]="t.value">{{t.viewValue}}</mat-option>
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                  <br/>
+                  <button (click)="AddTaskArray()" class="btn btn-primary" >
+                    @if(edittask === false){
+                        Add Task
+                    }@else {
+                        Alter Task
+                    }
+                    
+                </button>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    
+    <div *ngIf="todoList.length>0" class="m-2">
+        <mat-card appearance="outlined" *ngFor="let tdata of todoList; let i = index" class="m-2">
+            <mat-card-content>
+                <p>Task Name : {{ tdata.taskName | uppercase }}</p>
+                <p>Task Description : {{ tdata.taskDescription }}</p>
+                <p>Task Assigned To : {{ tdata.customerAssing }}</p>
+                <p>Task Status : {{ tdata.taskStatus }}</p>
+                <br/>
+                <button (click)="EditTaskArray(tdata)" class="btn btn-secondary " >Edit</button>
+                <button (click)="DeleteTaskArray(tdata.id) " class="btn btn-danger ml-10" >Delete</button>
+    
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

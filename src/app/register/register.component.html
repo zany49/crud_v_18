@@ -1,0 +1,42 @@
+<form [formGroup]="registerForm" (ngSubmit)="RegisterUser()">
+<mat-card appearance="outlined">
+    <mat-card-header>
+        <h2>New Registeration</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-form-field class="example-full-width">
+            <mat-label>user Name</mat-label>
+            <input matInput placeholder="User Name" formControlName="userName">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="User Email" formControlName="email" type="email">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>password</mat-label>
+            <input matInput placeholder="User Password" formControlName="password" type="password">
+        </mat-form-field>
+        <mat-radio-group aria-label="Select a gender" formControlName="gender">
+            <mat-radio-button value="male">Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="others">Others</mat-radio-button>
+          </mat-radio-group>
+        <mat-form-field>
+            <mat-label>Select Role</mat-label>
+            <mat-select formControlName="role">
+              @for (item of rolesList; track ($index)) {
+                <mat-option [value]="item.value">{{item.viewValue}}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+    
+          <mat-checkbox class="example-margin" color="primary" formControlName="term">Terms & Condition</mat-checkbox>
+    
+    </mat-card-content>
+
+      <mat-card-actions>
+        <button type="submit" mat-raised-button color="primary">Register</button>
+        <a mat-raised-button color="accent" routerLink="/login">Login</a>
+    </mat-card-actions>
+</mat-card>
+</form> 

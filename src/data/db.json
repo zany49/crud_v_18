@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "b37a",
+      "userName": "abduladmin",
+      "email": "superadmin@doodle.com",
+      "gender": "male",
+      "password": "welcome",
+      "role": "admin"
+    },
+    {
+      "id": "c729",
+      "userName": "abdul kalam",
+      "email": "cutomer@doodle.com",
+      "gender": "male",
+      "password": "welcome",
+      "role": "customer"
+    }
+  ],
+  "customerTodo": [
+    {
+      "id": 1,
+      "taskName": "abddul",
+      "customerAssing": "abdul kalam",
+      "taskDescription": "typescript upskiling",
+      "taskStatus": "notStarted"
+    },
+    {
+      "id": 2,
+      "taskName": "abdul",
+      "customerAssing": "abdul kalam",
+      "taskDescription": "type script",
+      "taskStatus": "completed"
+    },
+    {
+      "id": 3,
+      "taskName": "new check",
+      "customerAssing": "abdul kalam",
+      "taskDescription": "type script test",
+      "taskStatus": "completed"
+    }
+  ]
+}
