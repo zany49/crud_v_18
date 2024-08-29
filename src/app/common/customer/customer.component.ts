@@ -7,6 +7,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { TaskObject, TaskStatus } from '../../models/commonModules';
 import { CustomerTODOService } from '../../service/customer-todo.service';
+import { Store } from '@ngrx/store';
+import { IuserDataState, TArrayOfUsers } from '../../store/userDetails/userDetails.reducer';
+import { Observable } from 'rxjs';
+import { decrementUser, incrementUser, resetUser, userDetailsArrayUpdate, userDetailsUpdate } from '../../store/userDetails/userDetails.action';
 
 @Component({
   selector: 'app-customer',
@@ -36,11 +40,50 @@ export class CustomerComponent implements OnInit {
   ]
   customerNameList: TaskStatus[] =[ ]
   todoList:TaskObject[]=[]
+  // $ symbolysis the observables
+  counts$ ?: Observable<number>;
+  userDataObj$ ?: Observable<{ [key: string]: any }>;
+  userDataArry$ ?: Observable<TArrayOfUsers[]>;
+  name:string ='';
+  age:number =0;
+  userDataloc ?: TArrayOfUsers[] = []
 
-  constructor(private cusTodoService:CustomerTODOService){}
+  constructor(
+    private cusTodoService:CustomerTODOService,
+    private store:Store<{userDatas:IuserDataState}>
+  ){
+    this.counts$ = store.select("userDatas","count")
+    this.userDataObj$ = store.select("userDatas","userData")
+    this.userDataArry$ = store.select("userDatas","arrayOfUsersData")
+  }
   ngOnInit(): void {
     this.GetCustomerList()
     this.getCustomerToDOList()
+  }
+
+  onIncrement() {
+    this.store.dispatch(incrementUser());
+  }
+
+  onDecrement() {
+    this.store.dispatch(decrementUser());
+  }
+
+  onReset() {
+    this.store.dispatch(resetUser());
+  }
+
+  onUpdateUserData() {
+    this.store.dispatch(userDetailsUpdate({ userData: { name: 'Abdul', age: 18 } }));
+  }
+
+  onUpdateUserArrayData() {
+    if (!this.userDataloc) {
+      this.userDataloc = []; 
+    }
+    this.userDataloc = [...this.userDataloc,{name:this.name,age:this.age}]
+    console.log("this.userDataloc---->",this.userDataloc)
+    this.store.dispatch(userDetailsArrayUpdate({ arrayOfUsers: this.userDataloc }));
   }
 
   GetCustomerList(){

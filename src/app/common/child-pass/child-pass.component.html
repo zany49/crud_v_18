@@ -16,3 +16,14 @@
 <input [(ngModel)]="fruitname" name="fruitname">
 <button (click)="Updatefruits()">Add fruit</button>
 
+
+<h1>Counter: {{ counts$ | async }}</h1>
+ <p>{{userDataObj$| async | json}}</p>
+
+<div *ngIf="userDataArry$ | async as userDataArray">
+    @for (u of userDataArray; track $index) {
+      <p>{{u.name}}</p>
+      <p>{{u.age}}</p>
+
+    }
+  </div>

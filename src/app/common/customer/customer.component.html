@@ -54,4 +54,25 @@
             </mat-card-content>
         </mat-card>
     </div>
+
+    <h1>Counter: {{ counts$ | async }}</h1>
+    <button (click)="onIncrement()">Increment</button>
+    <button (click)="onDecrement()">Decrement</button>
+    <button (click)="onReset()">Reset</button>
+    <p>{{userDataObj$| async | json}}</p>
+    <button (click)="onUpdateUserData()">Update User Data</button>
+    <input type="text" name="name" placeholder="Enter  Name"  [(ngModel)]="name" class="m-2" >
+    <input type="number" name="age" placeholder="Enter  Age"  [(ngModel)]="age" class="m-2" >
+
+    <div *ngIf="userDataArry$ | async as userDataArray">
+      @for (u of userDataArray; track $index) {
+        <p>{{u.name}}</p>
+        <p>{{u.age}}</p>
+
+      }
+    </div>
+    <button (click)="onUpdateUserArrayData()">Update User array Data</button>
+
+
+
 </div>
